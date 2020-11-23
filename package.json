@@ -1,0 +1,14 @@
+{
+  "name": "proshop",
+  "version": "1.0.0",
+  "description": "Mern Ecommerce Web Application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "author": "Anurag",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
