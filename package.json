@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Mern Ecommerce Web Application",
   "main": "server.js",
-  "type" : "module",
+  "type": "module",
   "scripts": {
     "start": "node backend/server",
     "server": "nodemon backend/server",
@@ -13,9 +13,11 @@
   "author": "Anurag",
   "license": "MIT",
   "dependencies": {
+    "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.10.16"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
