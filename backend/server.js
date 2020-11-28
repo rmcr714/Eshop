@@ -1,12 +1,12 @@
 
-import express from 'express'
+import express, { json } from 'express'
+import {notFound,errorHandler} from './middleware/errorMiddleware.js'
 import dotenv from 'dotenv'
 import colors from 'colors'
 dotenv.config()
 const app = express()
-
-import products from './data/products.js'
 import connectDB from './config/db.js'
+import productRoutes from './routes/productRoutes.js'
 
 connectDB()         //Connecting to Db 
 
@@ -15,16 +15,12 @@ app.get('/', (req,res)=>{
     res.send('Api is Running....')
 } )
 
+app.use('/api/products' , productRoutes)
 
-app.get('/api/products', (req,res)=>{
-    res.json(products)
-} )
+app.use(notFound)
 
-app.get('/api/products/:id', async (req,res)=>{
-    const product = await products.find(p=>p._id == req.params.id);
-    
-    res.json(product)
-} )
+app.use(errorHandler)
+
 
 
 const PORT = process.env.PORT || 5000
