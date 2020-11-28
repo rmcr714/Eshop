@@ -29,11 +29,11 @@ const productSchema = mongoose.Schema({
         required:true
     },
     category:{
-        type:Boolean,
+        type:String,
         required:true
     },
     description:{
-        type:Boolean,
+        type:String,
         required:true
     },
     reviews:[reviewSchema],
