@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
     },
     password:{
         type:String,
-        required:true
+        required:true,
     },
     isAdmin:{
         type:Boolean,
@@ -33,7 +33,7 @@ userSchema.methods.matchPassword = async function(enteredPassword){
 
 }
 
-userSchema.pre('save',async function (){
+userSchema.pre('save',async function (next){
     if(!this.isModified('password')){
         next()
     }
