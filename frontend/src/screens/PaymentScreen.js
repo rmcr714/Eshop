@@ -1,9 +1,10 @@
 import React,{ useState } from 'react'
-import {Form,Button,Col} from 'react-bootstrap'
+import {Form,Button,Col,Card} from 'react-bootstrap'
 import {useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import CheckoutSteps from '../components/CheckoutSteps'
 import {savePaymentMethod} from '../actions/cartActions'
+import { yellow } from 'colors'
 
 const PaymentScreen = ({ history }) => {
 
@@ -27,7 +28,9 @@ const PaymentScreen = ({ history }) => {
     return (
         <FormContainer>
             <CheckoutSteps step1  step2 step3/>
-           <h1> Paymnet Method </h1>
+           
+           <Card body >
+               <Card.Title><h1> Paymnet Method </h1></Card.Title>
             <Form onSubmit = {submitHandler}>
             <Form.Group>
                 <Form.Label as = 'legend'>Select Method</Form.Label>
@@ -53,6 +56,7 @@ const PaymentScreen = ({ history }) => {
                     Continue
                 </Button>
             </Form>
+            </Card>
 
         </FormContainer>
     )
