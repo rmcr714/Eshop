@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useState,useEffect } from 'react'
 import {Form,Button} from 'react-bootstrap'
 import {useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
@@ -6,6 +6,18 @@ import CheckoutSteps from '../components/CheckoutSteps'
 import {saveShippingAddress} from '../actions/cartActions'
 
 const ShippingScreen = ({ history }) => {
+
+    const userLogin = useSelector(state => state.userLogin)
+
+    const {loading,userInfo,error} = userLogin
+
+    useEffect(()=>{
+        if(!userInfo){
+            history.push('/login')
+        }
+    },[history,userInfo])
+
+
 
     const cart = useSelector(state => state.cart)
     const {shippingAddress} = cart
