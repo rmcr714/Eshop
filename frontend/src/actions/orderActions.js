@@ -20,7 +20,7 @@ export const createOrder = (order) => async(dispatch,getState)=>{
         }
 
         const {data} = await axios.post(
-            `api/orders`, order,
+            `/api/orders`, order,
             config)
 
         dispatch({
@@ -45,6 +45,7 @@ export const getOrderDetails = (id) => async(dispatch,getState)=>{
         dispatch({
             type:ORDER_DETAILS_REQUEST
         })
+    
         
         const {userLogin : { userInfo } } = getState()
 
@@ -56,7 +57,7 @@ export const getOrderDetails = (id) => async(dispatch,getState)=>{
         }
 
         const {data} = await axios.get(
-            `api/orders/${id}`,
+            `/api/orders/${id}`,
             config)
 
         dispatch({
