@@ -5,7 +5,8 @@ import { USER_LOGIN_FAIL, USER_LOGIN_REQUEST,
     USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_DETAILS_FAIL,
      USER_UPDATE_PROFILE_SUCCESS, 
      USER_UPDATE_PROFILE_REQUEST, 
-     USER_UPDATE_PROFILE_FAIL,USER_DETAILS_RESET, USER_LIST_FAIL, USER_LIST_SUCCESS, USER_LIST_REQUEST} from "../constants/userConstants"
+     USER_UPDATE_PROFILE_FAIL,USER_DETAILS_RESET,
+      USER_LIST_FAIL, USER_LIST_SUCCESS, USER_LIST_REQUEST,USER_LIST_RESET} from "../constants/userConstants"
 
 import {ORDER_LIST_MY_RESET} from '../constants/orderConstants'
 
@@ -43,6 +44,7 @@ export const logout = ()=> (dispatch)=>{
     dispatch({type:USER_LOGOUT})
     dispatch({type:USER_DETAILS_RESET})
     dispatch({type:ORDER_LIST_MY_RESET})
+    dispatch({type:USER_LIST_RESET})
 
 }
 
