@@ -1,17 +1,23 @@
 import path from 'path'
 import express, { json } from 'express'
+import morgan from 'morgan'
 import {notFound,errorHandler} from './middleware/errorMiddleware.js'
 import dotenv from 'dotenv'
 import colors from 'colors'
-dotenv.config()
-const app = express()
 import connectDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 
+dotenv.config()
+
 connectDB()         //Connecting to Db 
+
+const app = express()
+if(process.env.NODE_ENV === 'developement'){
+    app.use(morgan('dev'))
+}
 
 app.use(express.json())
 
