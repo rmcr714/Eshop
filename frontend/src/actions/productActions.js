@@ -139,7 +139,7 @@ export const updateProduct = (product) => async(dispatch,getState)=>{
             payload:data
           
         })
-
+        dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data })
     
 
     }catch(error){
