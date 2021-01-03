@@ -124,6 +124,10 @@ const createProductReview = asyncHandler(async(req,res) =>{
        if(alreadyReviewed){
            res.status(400)
            throw new Error("Product already reviewed")
+        // console.log("Insode jane")
+        // alreadyReviewed.remove()
+
+        
        }
 
        const review = {
