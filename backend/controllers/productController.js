@@ -3,10 +3,20 @@ import Product from '../models/productModel.js'
 
 
 // @desc  Fetch all products
-// @route  GET /api/products
+// @route  GET /api/products             Search functionalty will come at GET /api/products?keyword= (whatevers passed in productlist action)
 // @access public
 const getProducts = asyncHandler(async(req,res) =>{
-    const products = await Product.find({})
+    const keyword = req.query.keyword ? {      //Search functionality
+        name:{
+            $regex:req.query.keyword,
+            $options:'i'
+        }
+    }:{}
+
+
+
+
+    const products = await Product.find({...keyword})
     res.json(products)
 
 })
@@ -122,10 +132,11 @@ const createProductReview = asyncHandler(async(req,res) =>{
     if(product){
         const alreadyReviewed = product.reviews.find(r => r.user.toString() === req.user._id.toString() )
        if(alreadyReviewed){
-           res.status(400)
-           throw new Error("Product already reviewed")
-        // console.log("Insode jane")
-        // alreadyReviewed.remove()
+        //    res.status(400)
+        //    throw new Error("Product already reviewed")
+
+        console.log("Insode jane")
+        alreadyReviewed.remove()
 
         
        }
@@ -155,4 +166,41 @@ const createProductReview = asyncHandler(async(req,res) =>{
 
 
 
-export {getProductById,getProducts,deleteProduct,createProduct,updateProduct,createProductReview} 
+
+
+// @desc  Get customer Reviews
+// @route  GET /api/products/:id/reviews
+// @access Private
+const editProductReview = asyncHandler(async(req,res) =>{
+
+
+    const product = await Product.findById(req.params.id)
+
+    if(product){
+        const alreadyReviewed = product.reviews.find(r => r.user.toString() === req.user._id.toString() )
+       if(alreadyReviewed){
+           res.status(200).json(alreadyReviewed)
+
+           
+        // console.log("Insode jane")
+        // alreadyReviewed.remove()
+
+       }else{
+           res.status(400).json({messsage:"Customer hasnt Reviewed"})
+           
+       }
+
+      
+
+    }else{
+        res.status(404)
+        throw new Error('Product not found')
+    }
+
+    
+
+})
+
+
+
+export {getProductById,getProducts,deleteProduct,createProduct,updateProduct,createProductReview,editProductReview} 

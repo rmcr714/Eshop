@@ -5,12 +5,14 @@ import Rating from '../components/Rating'
 import { Row, Col, Image, ListGroup, Card, Button,Form} from 'react-bootstrap'
 import Loading from '../components/Loader'
 import Message from '../components/Message'
-import {listProductDetails,createProductReview} from '../actions/productActions'
-import {PRODUCT_CREATE_REVIEW_RESET} from '../constants/productConstants'
+import {listProductDetails,createProductReview,productReviewEdit} from '../actions/productActions'
+import {PRODUCT_CREATE_REVIEW_RESET,PRODUCT_EDIT_REVIEW_RESET} from '../constants/productConstants'
+
 
 
 
 const ProductScreen = ({history,match}) => {
+    
     
     const [qty , setQty] = useState(1) 
 
@@ -18,6 +20,9 @@ const ProductScreen = ({history,match}) => {
     const [comment , setComment] = useState("")
 
     const dispatch = useDispatch()
+
+    const editProductReview = useSelector(state=>state.editProductReview)
+    const {success:successEditProduct,review,error:errorEditReview }= editProductReview
     
     const productDetails = useSelector(state => state.productDetails)
     const {loading,error,product} = productDetails
@@ -29,24 +34,37 @@ const ProductScreen = ({history,match}) => {
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
 
-   
+   useEffect(()=>{
+       dispatch({type:PRODUCT_EDIT_REVIEW_RESET})
+       setComment('')
+       setRating(0)
+   },[dispatch])
+
 
     useEffect(() => {
         if(successProductReview){
             alert('Review Submitted!')
             setRating(0)
             setComment('')
+            dispatch({type:PRODUCT_EDIT_REVIEW_RESET})
             dispatch({type:PRODUCT_CREATE_REVIEW_RESET})
         }
         dispatch(listProductDetails(match.params.id))
+      
+       
+        if(!successEditProduct){
+            dispatch(productReviewEdit(match.params.id))
+        }
+        if(successEditProduct){
+            setComment(review.comment)
+            setRating(review.rating)
+        }else{
+            setComment('')
+            setRating(0)
+        }
+    },[dispatch,match,successProductReview,successEditProduct])
 
-    },[dispatch,match,successProductReview])
 
-
-
-    
-    
-    
 
 
     const addToCartHandler = ()=>{
@@ -162,12 +180,12 @@ const ProductScreen = ({history,match}) => {
                     </ListGroup.Item>
                 ))}
                 
-                {/* {reviewAndComment.comment!=='' ? (
+                {review ? (
                     <>
                     <br>
                     </br>
                     <h4>Edit your Review</h4>
-                    {errorProductReview && <Message >{errorProductReview}</Message>}
+                    {errorEditReview && <Message >{errorEditReview}</Message>}
                     <Form onSubmit = {submitHandler}>
                             <Form.Group controlId = 'rating'>
                                 <Form.Label>
@@ -193,7 +211,7 @@ const ProductScreen = ({history,match}) => {
                         </>
 
 
-                ): */}
+                ):
                 <ListGroup.Item>
                     <h4>Write a Customer review</h4>
                     {errorProductReview && <Message >{errorProductReview}</Message>}
@@ -224,7 +242,7 @@ const ProductScreen = ({history,match}) => {
 
                     ):<Message>Please <Link to= '/login'>Sign in </Link>to write a review</Message>}
 
-                </ListGroup.Item>
+                </ListGroup.Item>}
             </ListGroup>
          </Col>
 
