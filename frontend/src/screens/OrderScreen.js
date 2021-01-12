@@ -9,6 +9,7 @@ import Loader from '../components/Loader'
 import { Link } from 'react-router-dom'
 import {getOrderDetails,payOrder,deliverOrder} from '../actions/orderActions'
 import {ORDER_PAY_RESET,ORDER_DELIVER_RESET} from '../constants/orderConstants'
+import Meta from '../components/Meta'
 
 
 const OrderScreen = ({match,history}) => {
@@ -84,6 +85,7 @@ const OrderScreen = ({match,history}) => {
 
     return loading?<Loader/>:error?<Message variant = 'danger'>{error}</Message>:
     <>
+    <Meta title = {"Orders"}/>
     <h2>Order {order._id}</h2>
     <Row>
                <Col md = {8} >

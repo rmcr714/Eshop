@@ -5,6 +5,7 @@ import FormContainer from '../components/FormContainer'
 import CheckoutSteps from '../components/CheckoutSteps'
 import {savePaymentMethod} from '../actions/cartActions'
 import { yellow } from 'colors'
+import Meta from '../components/Meta'
 
 const PaymentScreen = ({ history }) => {
 
@@ -39,6 +40,7 @@ const PaymentScreen = ({ history }) => {
 
     return (
         <FormContainer>
+            <Meta title = {"Payment"}/>
             <CheckoutSteps step1  step2 step3/>
            
            <Card body >

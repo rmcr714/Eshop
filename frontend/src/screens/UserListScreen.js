@@ -5,7 +5,7 @@ import {useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import {listUsers,deleteUser} from '../actions/userActions'
-
+import Meta from '../components/Meta'
 
 const UserListScreen = ({history}) => {
     const dispatch = useDispatch()
@@ -37,6 +37,7 @@ const UserListScreen = ({history}) => {
 
     return (
         <>
+        <Meta title = {"All Users"}/>
             <h2>Users</h2>
             {loading?<Loader></Loader>:error?<Message variant = 'danger'>{error}</Message>:
             (

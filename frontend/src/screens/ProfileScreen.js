@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import { getUserDetails ,updateUserProfile} from '../actions/userActions'
 import {listMyOrders} from '../actions/orderActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
+import Meta from '../components/Meta'
 
 const ProfileScreen = ({location,history}) => {
 
@@ -62,6 +63,7 @@ const ProfileScreen = ({location,history}) => {
     }
 
     return (<Row>
+        <Meta title = {"User Profile"}/>
         <Col md = {3}>
         <h2>User Profile</h2>
             {message && <Message variant = 'danger'>{message}</Message>}

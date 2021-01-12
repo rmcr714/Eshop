@@ -4,6 +4,7 @@ import {useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import CheckoutSteps from '../components/CheckoutSteps'
 import {saveShippingAddress} from '../actions/cartActions'
+import Meta from '../components/Meta'
 
 const ShippingScreen = ({ history }) => {
 
@@ -37,6 +38,7 @@ const ShippingScreen = ({ history }) => {
 
     return (
         <FormContainer>
+            <Meta title = "Shipping Address"/>
             <CheckoutSteps step1  step2/>
            <h1> Shipping </h1>
             <Form onSubmit = {submitHandler}>

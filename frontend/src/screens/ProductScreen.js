@@ -7,7 +7,7 @@ import Loading from '../components/Loader'
 import Message from '../components/Message'
 import {listProductDetails,createProductReview,productReviewEdit} from '../actions/productActions'
 import {PRODUCT_CREATE_REVIEW_RESET,PRODUCT_EDIT_REVIEW_RESET} from '../constants/productConstants'
-
+import Meta from '../components/Meta'
 
 
 
@@ -87,6 +87,7 @@ const ProductScreen = ({history,match}) => {
            <Link className = 'btn btn-light my-3' to = '/'>Go Back</Link>
     {loading? <Loading/>:error ? <Message variant = 'danger'>{error}</Message>:(
         <>
+        <Meta title = {product.name} description = {product.description}/>
          <Row>
          <Col md = {6}>
              <Image src = {product.image} alt = {product.name} fluid/>

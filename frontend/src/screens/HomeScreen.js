@@ -1,4 +1,5 @@
 import React , {useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
 import {Row,Col} from 'react-bootstrap'
 import Product from '../components/Product'
@@ -6,7 +7,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { listProducts } from '../actions/productActions'
 import Paginate from '../components/Paginate'
-import  productCarousel from '../components/ProductCarousel'
+import Meta from '../components/Meta'
 import ProductCarousel from '../components/ProductCarousel'
 
 const HomeScreen = ({match}) => {
@@ -28,8 +29,9 @@ const HomeScreen = ({match}) => {
 
     return (
         <>
-        {!keyword &&<ProductCarousel/>}
-        <h1>Latest Products</h1>
+       { keyword?<Meta title = {"Search Results for " + keyword}></Meta>:<Meta title = {"Welcome to Eshop | Home"}/>}
+        {!keyword ?<ProductCarousel/>:<Link to = '/' className = 'btn btn-light'>Go Back</Link>}
+        {keyword?<h2>Search Results</h2>:<h1>Latest Products</h1>}
     {loading ? <Loader/>:error ? <Message variant = 'danger'>{error}</Message>:
     <>
     <Row>
